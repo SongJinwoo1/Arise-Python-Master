@@ -1,0 +1,52 @@
+/* تأثير الزجاج المتطور (Premium Glassmorphism) */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* الخلفية السديمية المخصصة */
+.cosmic-bg {
+    background: url('assets/background.jpg') no-repeat center center/cover;
+    filter: brightness(0.4) saturate(1.2);
+    transform: scale(1.05); /* لمنع حواف الـ Blur */
+}
+
+/* الأزرار التفاعلية */
+.active-tab {
+    color: #D4AF37;
+    border-bottom: 2px solid #D4AF37;
+    padding-bottom: 4px;
+}
+
+.whatsapp-btn {
+    box-shadow: 0 15px 30px rgba(37, 211, 102, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1) rotate(8deg);
+    filter: brightness(1.1);
+}
+
+/* بطاقات المشاريع */
+.project-card {
+    transition: all 0.5s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-15px);
+    border-color: rgba(212, 175, 55, 0.4);
+    background: rgba(212, 175, 55, 0.02);
+}
+
+/* أنيميشن الشعار */
+@keyframes drawWave {
+    from { stroke-dasharray: 0 100; }
+    to { stroke-dasharray: 100 0; }
+}
+
+.wave-path {
+    animation: drawWave 2s ease-out;
+}
