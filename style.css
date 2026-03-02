@@ -1,51 +1,64 @@
 :root {
-    --gold: #d4af37;
-    --navy: #0a192f;
-    --glass: rgba(255, 255, 255, 0.03);
+    /* الوضع الساطع الافتراضي */
+    --bg-main: #f4f4f4;
+    --brand-primary: #1a3c5a; /* الكحلي بتاعك */
+    --text-sec: #777777;
+    --card-bg: rgba(255, 255, 255, 0.7);
 }
 
-* { box-sizing: border-box; cursor: none; } /* إخفاء الماوس لتشغيل الكاستم */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* الوضع الداكن */
+        --bg-main: #0a0a0a;
+        --brand-primary: #d4af37; /* الذهبي بتاعك */
+        --text-sec: #bbbbbb;
+        --card-bg: rgba(0, 0, 0, 0.6);
+    }
+}
 
 body {
-    margin: 0; background-color: var(--navy);
-    color: white; font-family: 'Tajawal', sans-serif;
+    margin: 0; padding: 0;
+    background-color: var(--bg-main);
+    color: var(--brand-primary);
+    font-family: 'Tajawal', sans-serif;
+    transition: all 0.5s ease;
     overflow-x: hidden;
 }
 
-.space-bg {
-    position: fixed; inset: 0; z-index: -2;
-    background-size: cover; background-position: center;
-    filter: brightness(0.5);
+/* الشعار التفاعلي */
+.logo-icon { width: 60px; height: 60px; }
+.logo-path { stroke: var(--brand-primary); transition: stroke 0.5s ease; }
+.logo-dot { fill: var(--brand-primary); transition: fill 0.5s ease; }
+
+.glass-nav {
+    display: flex; justify-content: space-between; padding: 20px 5%;
+    position: sticky; top: 0; backdrop-filter: blur(15px); z-index: 100;
 }
 
-.glass-header {
-    padding: 20px 5%; display: flex; justify-content: space-between;
-    align-items: center; backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+.brand-info { display: flex; flex-direction: column; margin-right: 15px; }
+.brand-name { font-size: 24px; font-weight: bold; }
+.tagline { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-sec); }
+
+/* الهيكل العام */
+.hero { height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.main-title { font-size: 3.5rem; margin-bottom: 20px; }
+.highlight { color: var(--brand-primary); }
+
+.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; padding: 50px 5%; }
+.project-card { border-radius: 30px; overflow: hidden; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); transition: 0.4s; }
+.project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+
+.card-video, .card-img { width: 100%; height: 250px; object-fit: cover; }
+.card-content { padding: 25px; }
+
+/* لوحة المطور */
+.admin-ui {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 400px; padding: 30px; border-radius: 20px; display: none; z-index: 1000;
+    border: 1px solid var(--brand-primary); background: rgba(0,0,0,0.9);
 }
-
-.logo { height: 50px; filter: drop-shadow(0 0 10px var(--gold)); }
-
-.hero { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-
-.gold-text { color: var(--gold); text-shadow: 0 0 15px var(--gold); }
-
-/* شبكة البطاقات */
-.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 50px 10%; }
-
-.card { border-radius: 25px; overflow: hidden; border: 1px solid rgba(212,175,55,0.2); transition: 0.4s; }
-.card:hover { transform: translateY(-10px); border-color: var(--gold); }
-
-.card-media { height: 200px; background-size: cover; position: relative; }
-.card-media video { width: 100%; height: 100%; object-fit: cover; }
 
 #custom-cursor {
-    width: 20px; height: 20px; border: 2px solid var(--gold);
+    width: 15px; height: 15px; background: var(--brand-primary);
     border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999;
-    transition: transform 0.1s;
-}
-
-.hidden-panel {
-    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    padding: 40px; border-radius: 30px; display: none; z-index: 10000;
 }
