@@ -3,147 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ARISE SYSTEM | UNIVERSAL HUD</title>
+    <title>ARISE SYSTEM | THE MONARCH HUD</title>
     <style>
         :root { --p: #a333ff; --bg: #050505; --cyan: #00f2ff; --gray: #121212; --text: #e0e0e0; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
         
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        .main-wrapper { width: 100%; max-width: 500px; padding: 15px; animation: fadeIn 1s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        body { 
-            background: var(--bg); color: var(--text); 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            margin: 0; padding: 0; min-height: 100vh;
-            display: flex; justify-content: center; align-items: center;
-        }
-
-        /* حاوية مرنة تتكيف مع حجم الشاشة */
-        .main-wrapper {
-            width: 100%; max-width: 500px; padding: 15px;
-            animation: fadeIn 0.8s ease-in;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .card {
-            background: rgba(15, 15, 15, 0.95);
-            border: 2px solid var(--p);
-            border-radius: 24px;
-            padding: 25px;
-            box-shadow: 0 0 40px rgba(163, 51, 255, 0.15);
-            backdrop-filter: blur(10px);
-        }
-
-        /* تحسينات الواجهة للهواتف */
-        h1 { 
-            font-size: clamp(1.2rem, 5vw, 1.8rem); 
-            color: var(--p); text-align: center; 
-            text-shadow: 0 0 15px var(--p); margin-bottom: 20px;
-        }
-
-        .auth-btn {
-            width: 100%; border: 1px solid var(--cyan);
-            background: transparent; color: var(--cyan);
-            padding: 14px; border-radius: 12px;
-            font-size: 1rem; font-weight: bold;
-            cursor: pointer; transition: 0.3s;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-
-        .auth-btn:active { transform: scale(0.95); background: rgba(0, 242, 255, 0.1); }
-
-        /* HUD التفاعلي */
-        .user-profile {
-            display: flex; align-items: center; gap: 15px;
-            background: var(--gray); padding: 12px;
-            border-radius: 16px; margin-bottom: 20px;
-        }
-
-        .avatar { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--p); object-fit: cover; }
+        .card { background: rgba(15, 15, 15, 0.98); border: 2px solid var(--p); border-radius: 24px; padding: 25px; box-shadow: 0 0 50px rgba(163, 51, 255, 0.3); text-align: center; position: relative; overflow: hidden; }
         
-        .rank-info { flex-grow: 1; }
-        .rank-tag { color: var(--cyan); font-weight: 900; font-size: 0.8rem; letter-spacing: 1px; }
-
-        /* شريط التقدم */
-        .progress-area { margin: 20px 0; }
-        .xp-label { font-size: 0.7rem; margin-bottom: 5px; display: block; color: #888; }
-        .bar-bg { background: #222; height: 10px; border-radius: 5px; overflow: hidden; border: 1px solid #333; }
-        #xp-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--p), var(--cyan)); transition: 1s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
-
-        /* قائمة المهام المرنة */
-        .quest-item {
-            background: #1a1a1a; padding: 15px;
-            border-radius: 14px; margin-bottom: 12px;
-            border-right: 4px solid var(--p);
-        }
-
-        .quest-item label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; }
+        /* شارات الرتبة */
+        .rank-glow { position: absolute; top: -50px; left: -50px; width: 100px; height: 100px; background: var(--p); filter: blur(60px); opacity: 0.5; }
         
-        input {
-            width: 100%; padding: 10px; background: #000;
-            border: 1px solid #333; color: white; border-radius: 8px;
-            margin-bottom: 10px; outline: none; transition: 0.3s;
-        }
+        h1 { color: var(--p); text-shadow: 0 0 15px var(--p); font-size: 1.4rem; margin-bottom: 20px; letter-spacing: 2px; }
+        
+        /* واجهة HUD */
+        .user-header { display: flex; align-items: center; gap: 15px; background: var(--gray); padding: 15px; border-radius: 18px; margin-bottom: 20px; border-right: 5px solid var(--cyan); }
+        .avatar { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--p); box-shadow: 0 0 10px var(--p); }
+        .u-info { text-align: right; flex-grow: 1; }
+        .u-name { font-weight: 900; font-size: 1.1rem; color: #fff; }
+        .rank-tag { color: var(--cyan); font-weight: 900; font-size: 0.85rem; text-transform: uppercase; }
 
-        input:focus { border-color: var(--p); box-shadow: 0 0 5px var(--p); }
+        /* شريط الـ XP */
+        .xp-box { margin: 20px 0; text-align: right; }
+        .xp-label { font-size: 0.75rem; color: #888; margin-bottom: 5px; display: block; }
+        .bar-bg { background: #222; height: 12px; border-radius: 6px; overflow: hidden; border: 1px solid #333; }
+        #xp-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--p), var(--cyan)); transition: 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
 
-        .btn-action {
-            width: 100%; background: var(--p); color: white;
-            border: none; padding: 12px; border-radius: 10px;
-            font-weight: bold; cursor: pointer;
-        }
+        /* المهام */
+        .quest-list { max-height: 400px; overflow-y: auto; padding-right: 5px; }
+        .quest-item { background: #1a1a1a; padding: 18px; border-radius: 16px; margin-bottom: 15px; border-right: 4px solid var(--p); text-align: right; transition: 0.3s; }
+        .quest-item:hover { transform: translateX(-5px); background: #222; }
+        .quest-label { color: var(--p); font-weight: bold; font-size: 0.95rem; margin-bottom: 10px; display: block; }
+        
+        input { width: 100%; padding: 12px; background: #000; border: 1px solid #333; color: #00f2ff; border-radius: 10px; margin-bottom: 12px; font-size: 0.9rem; }
+        input:focus { border-color: var(--cyan); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
+        
+        .btn-strike { width: 100%; background: var(--p); color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .btn-strike:active { transform: scale(0.98); opacity: 0.8; }
+        .btn-strike:disabled { background: #333; cursor: not-allowed; border: 1px solid #444; }
 
-        .hidden { display: none; }
-
-        /* استعلامات الوسائط (Media Queries) لضمان التوافق */
-        @media (max-width: 360px) {
-            .card { padding: 15px; }
-            h1 { font-size: 1.1rem; }
-        }
+        .auth-btn { width: 100%; border: 2px solid var(--cyan); background: transparent; color: var(--cyan); padding: 16px; border-radius: 15px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 1.1rem; }
+        
+        .hidden { display: none !important; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--p); border-radius: 10px; }
     </style>
 </head>
 <body>
 
 <div class="main-wrapper">
     <div id="auth-screen" class="card">
+        <div class="rank-glow"></div>
         <h1>ARISE TECH SYSTEM</h1>
         <button class="auth-btn" id="loginBtn">
-            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M21.35 11.1h-9.17v2.73h6.51c-.33 1.56-1.56 2.73-3.21 2.73c-2.02 0-3.65-1.63-3.65-3.65s1.63-3.65 3.65-3.65c.88 0 1.68.32 2.3.84l2.13-2.13C18.67 5.43 16.73 4.53 14.48 4.53c-4.14 0-7.5 3.36-7.5 7.5s3.36 7.5 7.5 7.5c4.14 0 7.5-3.36 7.5-7.5c0-.45-.03-.9-.08-1.33z"/></svg>
-            اتصال عبر جوجل
+            <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21.35 11.1h-9.17v2.73h6.51c-.33 1.56-1.56 2.73-3.21 2.73c-2.02 0-3.65-1.63-3.65-3.65s1.63-3.65 3.65-3.65c.88 0 1.68.32 2.3.84l2.13-2.13C18.67 5.43 16.73 4.53 14.48 4.53c-4.14 0-7.5 3.36-7.5 7.5s3.36 7.5 7.5 7.5c4.14 0 7.5-3.36 7.5-7.5c0-.45-.03-.9-.08-1.33z"/></svg>
+            اتصال الهوية السيادية
         </button>
     </div>
 
     <div id="hud-screen" class="card hidden">
-        <div class="user-profile">
+        <div class="user-header">
             <img id="u-img" class="avatar" src="" alt="">
-            <div class="rank-info">
-                <div id="u-name" style="font-size: 0.9rem; font-weight: bold;">جاري المزامنة...</div>
-                <div class="rank-tag">MONARCH RANK: <span id="u-rank">E</span></div>
+            <div class="u-info">
+                <div id="u-name" class="u-name">جاري الاستدعاء...</div>
+                <div class="rank-tag">RANK: <span id="u-rank">E</span></div>
             </div>
         </div>
 
-        <div class="progress-area">
-            <span class="xp-label">نظام الخبرة المكتسبة (XP)</span>
+        <div class="xp-box">
+            <span class="xp-label">مستوى الخبرة الحالية (EXP)</span>
             <div class="bar-bg"><div id="xp-fill"></div></div>
         </div>
 
-        <div id="quests-container">
+        <div class="quest-list" id="quests-container">
             <div class="quest-item">
-                <label>📖 ورد القرآن الكريم</label>
-                <input type="text" id="ev-q" placeholder="أدخل السورة والآيات لإثبات الورد">
-                <button class="btn-action" onclick="complete('q')">تأكيد الإنجاز</button>
+                <label class="quest-label">📖 ورد القرآن الكريم (إجباري)</label>
+                <input type="text" id="ev-quran" placeholder="أدخل السورة والآيات المنجزة...">
+                <button class="btn-strike" onclick="strike('quran')">توثيق الإنجاز ⚔️</button>
             </div>
             <div class="quest-item">
-                <label>🇬🇧 اللغة الإنجليزية</label>
-                <input type="text" id="ev-e" placeholder="اكتب 5 كلمات جديدة تعلمتها اليوم">
-                <button class="btn-action" onclick="complete('e')">تأكيد الإنجاز</button>
+                <label class="quest-label">🇬🇧 تطوير الإنجليزية (إجباري)</label>
+                <input type="text" id="ev-english" placeholder="اكتب 5 كلمات أو قاعدة تعلمتها...">
+                <button class="btn-strike" onclick="strike('english')">توثيق الإنجاز ⚔️</button>
             </div>
-        </div>
+            </div>
+
+        <button onclick="auth.signOut().then(()=>location.reload())" style="background:none; border:none; color:#444; cursor:pointer; font-size:0.7rem; margin-top:15px; text-decoration:underline;">قطع الاتصال بالنظام</button>
     </div>
 </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -157,33 +111,86 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    document.getElementById('loginBtn').onclick = () => signInWithPopup(auth, new GoogleAuthProvider());
+    // بروتوكول الدخول (Redirect) لحل مشكلة الشاشة البيضاء
+    document.getElementById('loginBtn').onclick = () => signInWithRedirect(auth, new GoogleAuthProvider());
 
+    // مراقب الحالة ونظام تصفير السبت
     onAuthStateChanged(auth, async (u) => {
         if (u) {
             document.getElementById('auth-screen').classList.add('hidden');
             document.getElementById('hud-screen').classList.remove('hidden');
+            
             const r = doc(db, "monarchs", u.uid);
             let s = await getDoc(r);
-            if (!s.exists()) await setDoc(r, { name: u.displayName, rank: "E", xp: 0 });
-            const d = (await getDoc(r)).data();
-            document.getElementById('u-name').innerText = d.name;
-            document.getElementById('u-rank').innerText = d.rank;
-            document.getElementById('u-img').src = u.photoURL;
-            document.getElementById('xp-fill').style.width = d.xp + "%";
+            
+            // تحقق من تصفير السبت (كل سبت 23:59)
+            const now = new Date();
+            if (now.getDay() === 6 && now.getHours() === 23 && now.getMinutes() >= 58) {
+                await updateDoc(r, { xp: 0, rank: "E" });
+            }
+
+            if (!s.exists()) {
+                await setDoc(r, { name: u.displayName, rank: "E", xp: 0, lastLogin: now });
+                s = await getDoc(r);
+            }
+
+            const d = s.data();
+            updateUI(d, u.photoURL);
+            generateHybridQuests();
         }
     });
 
-    window.complete = async (t) => {
-        const ev = document.getElementById(`ev-${t}`).value;
-        if(ev.length < 5) return alert("🛡️ بروتوكول الإثبات يرفض الإدخال القصير!");
+    function updateUI(d, photo) {
+        document.getElementById('u-name').innerText = d.name;
+        document.getElementById('u-img').src = photo;
+        
+        // خوارزمية الرتب التلقائية
+        let rank = "E";
+        if (d.xp >= 100) rank = "D";
+        if (d.xp >= 300) rank = "C";
+        if (d.xp >= 600) rank = "B";
+        if (d.xp >= 900) rank = "A";
+        if (d.xp >= 1000) rank = "S";
+        
+        document.getElementById('u-rank').innerText = rank;
+        document.getElementById('xp-fill').style.width = Math.min(d.xp, 100) + "%";
+    }
+
+    // توليد المهام الهجينة (شريعة، عربي، علوم، تقنية)
+    function generateHybridQuests() {
+        const tasks = [
+            { id: 'sharia', label: '🛡️ شريعة: حفظ حديث أو صفحة فقه' },
+            { id: 'arabic', label: '✍️ عربي: درس نحو أو بلاغة' },
+            { id: 'science', label: '🧪 علوم: مراجعة فصل (طب)' },
+            { id: 'tech', label: '💻 تقنية: بناء وظيفة برمجية' }
+        ];
+        
+        let html = '';
+        tasks.forEach(t => {
+            html += `
+                <div class="quest-item">
+                    <label class="quest-label">${t.label}</label>
+                    <input type="text" id="ev-${t.id}" placeholder="اكتب ما أنجزته بالتفصيل...">
+                    <button class="btn-strike" onclick="strike('${t.id}')">تأكيد الاستحقاق ⚔️</button>
+                </div>
+            `;
+        });
+        document.getElementById('quests-container').innerHTML += html;
+    }
+
+    // بروتوكول الإثبات (Evidence Protocol)
+    window.strike = async (id) => {
+        const ev = document.getElementById(`ev-${id}`).value;
+        if (ev.length < 10) return alert("🛡️ مرفوض! بروتوكول الإثبات يتطلب 10 أحرف على الأقل.");
+        
         const r = doc(db, "monarchs", auth.currentUser.uid);
         const s = await getDoc(r);
-        const nxp = Math.min((s.data().xp || 0) + 15, 100);
+        const nxp = (s.data().xp || 0) + 15;
+        
         await updateDoc(r, { xp: nxp });
-        document.getElementById('xp-fill').style.width = nxp + "%";
-        document.getElementById(`ev-${t}`).disabled = true;
-        alert("⚔️ تم الإنجاز ومزامنة البيانات سحابياً.");
+        document.getElementById(`ev-${id}`).disabled = true;
+        document.getElementById(`ev-${id}`).placeholder = "✅ تـم التوثيق سحابياً";
+        location.reload(); // تحديث الرتبة والـ XP
     };
 </script>
 </body>
