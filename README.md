@@ -1,21 +1,49 @@
-# Calm Solutions | Premium Software Portfolio
+# 🌌 Arise Tech Agency | Level Up Your Reality
 
-Professional portfolio built for **Calm Solutions** focusing on high-end clients in Medical and Food sectors.
+Welcome to the official repository of **Arise Tech**, a futuristic digital agency specializing in crafting high-end web experiences, AI automation, and luxury digital identities.
 
-## 🚀 Technologies
-- **HTML5/CSS3** (Glassmorphism Effects)
-- **Tailwind CSS** (Styling Framework)
-- **Vanilla JavaScript** (Filtering Logic)
-
-## ✨ Key Features
-- **Dynamic Category Filtering**: Seamlessly switch between Medical and Food projects.
-- **Glassmorphism UI**: High-end visual depth optimized for iPad Pro M2 (120Hz).
-- **Responsive Design**: Mobile-first approach with premium aesthetics.
-
-## 🛠 Setup
-1. Clone the repo.
-2. Ensure images are in the `/assets` folder.
-3. Open `index.html` in any modern browser.
+> "We don't just build websites; we merge AI with human creativity to redefine your digital reality."
 
 ---
-*Crafted with precision by Calm Solutions.*
+
+## 🚀 Featured Project: Arij Al-Fakhama (أريج)
+Inside this repository, you will find our flagship luxury e-commerce concept for **Arij Perfumes**. It showcases:
+- **Cinematic Visuals:** High-quality background video and preloader.
+- **Classic Luxury:** A blend of Matte Gold and Midnight Black aesthetics.
+- **Glassmorphism:** Modern blurred-glass UI components.
+- **Technical Excellence:** Fully responsive design with AOS animations.
+
+---
+
+## 🛠️ Technical Stack
+We use cutting-edge technologies to ensure performance and scalability:
+- **Core:** HTML5 / CSS3 / JavaScript (ES6+)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Animations:** [AOS (Animate On Scroll)](https://michalsnik.github.io/aos/)
+- **Visuals:** [Lucide Icons](https://lucide.dev/) & Cinematic Video Integration
+
+---
+
+## 📂 Repository Structure
+- `index.html`: The main Agency Portfolio & Portal.
+- `arij.html`: The Luxury Perfume Store landing page.
+- `README.md`: Project documentation (You are here).
+
+---
+
+## 🌐 Live Demo
+Experience the reality shift here:
+👉 **[Launch Arise Tech Portfolio](https://songjinwoo1.github.io/Arise-Tech/)**
+
+---
+
+## 📬 Connect With Us
+Are you ready to level up your business?
+- **WhatsApp:** [+965 97805334](https://wa.me/96597805334)
+- **Developer:** [SongJinwoo1](https://github.com/SongJinwoo1)
+
+---
+<p align="center">
+  © 2026 Arise Tech Agency. All rights reserved. <br>
+  <i>"Transforming code into premium experiences."</i>
+</p>
