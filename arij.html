@@ -3,245 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أريج | سيمفونية الفخامة الخالدة</title>
+    <title>أريج | تجربة الفخامة الرقمية</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
-    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        midnight: '#030303',
-                        gold: '#D4AF37',
-                        goldLight: '#F1D592'
-                    },
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['Tajawal', 'sans-serif'],
-                    }
+                    colors: { midnight: '#020202', gold: '#D4AF37', goldLight: '#F1D592' },
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['Tajawal', 'sans-serif'] }
                 }
             }
         }
     </script>
 
     <style>
-        body { background-color: #030303; color: #fff; font-family: 'Tajawal', sans-serif; overflow-x: hidden; }
+        body { background-color: #020202; color: #fff; font-family: 'Tajawal', sans-serif; overflow-x: hidden; }
         
-        /* شاشة التحميل الفاخرة */
+        /* شاشة التحميل الملكية */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #030303; z-index: 9999; display: flex; justify-content: center; align-items: center;
-            transition: opacity 1s ease, visibility 1s;
-        }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #020202; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
         .gold-gradient {
             background: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #D4AF37 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* تحريك الفيديو في الخلفية */
-        .video-docker video {
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            min-width: 100%; min-height: 100%; width: auto; height: auto;
-            position: absolute; object-fit: cover;
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .video-overlay {
-            background: linear-gradient(to bottom, rgba(3,3,3,0.7) 0%, rgba(3,3,3,1) 100%);
+        /* تأثير العمق للمنتجات */
+        .product-card { transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+        .product-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1); }
+        
+        /* فيديو الخلفية */
+        .video-container video {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            min-width: 100%; min-height: 100%; object-fit: cover; opacity: 0.35;
         }
 
-        /* زر متوهج */
-        .btn-glow {
-            position: relative; overflow: hidden; transition: all 0.5s;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-        }
-        .btn-glow:hover {
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
-            transform: scale(1.05);
-        }
-
-        .img-reveal {
-            clip-path: inset(0 0 0 0);
-            transition: clip-path 1.5s ease-in-out;
-        }
+        /* تحريك الزهور الافتراضي */
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
+        .float-anim { animation: float 6s ease-in-out infinite; }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
     <div id="preloader">
-        <div class="text-center">
-            <div class="font-serif text-5xl md:text-7xl gold-gradient animate-pulse tracking-[0.3em]">ARIJ</div>
-            <div class="mt-4 h-1 w-24 bg-gold mx-auto rounded-full overflow-hidden">
-                <div class="h-full bg-white animate-[progress_2s_ease-in-out_infinite]"></div>
-            </div>
-        </div>
+        <div class="font-serif text-6xl gold-gradient animate-pulse tracking-[0.4em]">ARIJ</div>
+        <p class="text-gray-600 mt-4 tracking-widest uppercase text-[10px]">Loading Luxury...</p>
     </div>
 
-    <nav class="fixed w-full z-50 glass py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-500" id="navbar">
+    <nav class="fixed w-full z-[100] glass py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-500" id="navbar">
         <div class="font-serif text-2xl md:text-3xl font-bold tracking-widest gold-gradient">ARIJ</div>
-        <div class="hidden lg:flex gap-10 text-[10px] uppercase tracking-[0.4em] font-bold text-gray-400">
+        <div class="hidden lg:flex gap-12 text-[10px] uppercase tracking-[0.4em] font-bold text-gray-400">
             <a href="#home" class="hover:text-gold transition">الرئيسية</a>
+            <a href="#quiz" class="hover:text-gold transition">مستشار العطر</a>
             <a href="#collection" class="hover:text-gold transition">المجموعة</a>
-            <a href="#story" class="hover:text-gold transition">الهرم العطري</a>
         </div>
-        <a href="index.html" class="glass px-5 py-2 rounded-full text-[10px] font-bold text-gold border-gold/20 hover:bg-gold hover:text-black transition">العودة للمعرض</a>
+        <a href="index.html" class="bg-gold/10 border border-gold/30 text-gold px-6 py-2 rounded-full text-[10px] font-bold hover:bg-gold hover:text-black transition">العودة للوكالة</a>
     </nav>
 
     <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="video-docker absolute inset-0 z-0">
-            <video autoplay muted loop playsinline class="opacity-40">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-pink-flowers-in-close-up-11846-large.mp4" type="video/mp4">
+        <div class="video-container absolute inset-0 z-0">
+            <video autoplay muted loop playsinline>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-floating-white-flowers-in-the-water-43282-large.mp4" type="video/mp4">
             </video>
-            <div class="video-overlay absolute inset-0 z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-midnight/60 via-midnight to-midnight"></div>
         </div>
         
-        <div class="relative z-20 text-center px-6" data-aos="zoom-out" data-aos-duration="2000">
-            <p class="font-serif text-gold tracking-[0.5em] text-sm md:text-lg mb-6 uppercase" data-aos="fade-up">Elite Fragrances</p>
-            <h1 class="text-5xl md:text-9xl font-bold mb-8 leading-tight drop-shadow-2xl">
-                أريج.. <br> <span class="gold-gradient italic">فخامة الأثر.</span>
-            </h1>
-            <p class="text-gray-400 text-sm md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-                من قلب الطبيعة صُنع ليكون توقيعك الخاص. نجمع بين أصالة الشرق وحداثة التصميم في كل قطرة.
+        <div class="relative z-10 text-center px-6" data-aos="fade-up" data-aos-duration="2000">
+            <h2 class="font-serif text-gold tracking-[0.6em] text-xs md:text-sm mb-6 uppercase">Timeless Elegance</h2>
+            <h1 class="text-5xl md:text-[10rem] font-bold mb-8 leading-none tracking-tighter">أريج.. <br> <span class="gold-gradient italic">روح الفخامة</span></h1>
+            <p class="text-gray-400 text-sm md:text-xl max-w-2xl mx-auto mb-12 font-light leading-relaxed">
+                اكتشف سحر العطور التي تتجاوز حدود الزمن، مصممة خصيصاً لأولئك الذين يقدرون التفاصيل الفاخرة.
             </p>
-            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-                <a href="#collection" class="btn-glow bg-gold text-midnight px-12 py-4 rounded-full font-bold text-lg">استكشف المجموعة</a>
-                <a href="https://wa.me/96597805334" class="glass px-12 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition flex items-center gap-2">
-                    <i data-lucide="message-circle" class="w-5 h-5"></i> اطلب الآن
-                </a>
+            <div class="flex flex-col md:flex-row gap-6 justify-center">
+                <a href="#quiz" class="bg-gold text-midnight px-14 py-5 rounded-full font-bold text-lg hover:scale-105 transition shadow-2xl shadow-gold/20">ابدأ اختبار العطر</a>
+                <a href="#collection" class="glass px-14 py-5 rounded-full font-bold text-lg hover:bg-white/5 transition">استكشف المجموعة</a>
             </div>
         </div>
     </section>
 
-    <section id="story" class="py-32 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div class="relative group" data-aos="fade-left">
-                <div class="absolute -inset-4 bg-gold/5 blur-[80px] group-hover:bg-gold/10 transition duration-1000"></div>
-                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800" 
-                     class="relative rounded-[4rem] shadow-2xl border border-white/5 img-reveal" alt="Perfume Story">
-                <div class="absolute bottom-10 right-10 glass p-6 rounded-3xl hidden md:block">
-                    <p class="text-gold font-serif text-3xl">Premium</p>
-                    <p class="text-[10px] tracking-widest text-gray-500 uppercase">Quality Essence</p>
+    <section id="quiz" class="py-32 px-6 bg-[#050505] relative overflow-hidden">
+        <div class="max-w-4xl mx-auto glass p-10 md:p-20 rounded-[3rem] text-center relative z-10">
+            <h3 class="font-serif text-gold text-xl mb-4 italic" data-aos="fade-up">Personalized Experience</h3>
+            <h2 class="text-4xl md:text-6xl font-bold mb-10" data-aos="fade-up" data-aos-delay="100">مستشار العطر الذكي</h2>
+            <p class="text-gray-500 mb-12" data-aos="fade-up" data-aos-delay="200">أجب على سؤالين لنقترح لك العطر الذي يمثل شخصيتك الحقيقية.</p>
+            
+            <div id="quiz-container" class="space-y-8" data-aos="zoom-in">
+                <div id="q1">
+                    <p class="text-xl mb-6">ما هو توقيتك المفضل للتألق؟</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button onclick="nextStep('morning')" class="px-8 py-3 rounded-xl border border-white/10 hover:border-gold hover:text-gold transition">صباح هادئ</button>
+                        <button onclick="nextStep('night')" class="px-8 py-3 rounded-xl border border-white/10 hover:border-gold hover:text-gold transition">سهرة صاخبة</button>
+                    </div>
+                </div>
+                <div id="quiz-result" class="hidden">
+                    <p class="text-gold tracking-widest uppercase text-xs mb-2">توصية المستشار:</p>
+                    <h4 id="result-name" class="text-4xl font-bold mb-6">العود الملكي</h4>
+                    <button onclick="resetQuiz()" class="text-gray-500 underline text-sm">إعادة الاختبار</button>
                 </div>
             </div>
+        </div>
+    </section>
 
+    <section id="collection" class="py-32 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-20">
             <div data-aos="fade-right">
-                <h2 class="text-gold font-serif text-xl mb-4 tracking-widest uppercase italic">The Olfactory Pyramid</h2>
-                <h3 class="text-4xl md:text-6xl font-bold mb-12 leading-tight">حكاية عطر <br> <span class="text-gray-600">تبدأ ولا تنتهي.</span></h3>
-                
-                <div class="space-y-6">
-                    <div class="glass p-8 rounded-[2rem] flex items-start gap-6 hover:bg-white/5 transition duration-500">
-                        <div class="p-4 bg-gold/10 rounded-2xl text-gold"><i data-lucide="wind"></i></div>
-                        <div>
-                            <h4 class="text-xl font-bold mb-2 tracking-wide">الافتتاحية (القمة)</h4>
-                            <p class="text-gray-500 text-sm leading-relaxed">البرغموت المنعش، لمحات من الخزامى الفرنسي، ونكهة الفلفل الوردي.</p>
-                        </div>
-                    </div>
-                    <div class="glass p-8 rounded-[2rem] flex items-start gap-6 border-gold/20 border hover:bg-gold/5 transition duration-500">
-                        <div class="p-4 bg-gold/10 rounded-2xl text-gold"><i data-lucide="heart"></i></div>
-                        <div>
-                            <h4 class="text-xl font-bold mb-2 tracking-wide text-gold">القلب (الروح)</h4>
-                            <p class="text-gray-400 text-sm leading-relaxed">زهرة الأوركيد السوداء، خشب الصندل العتيق، والياسمين الدمشقي.</p>
-                        </div>
-                    </div>
-                    <div class="glass p-8 rounded-[2rem] flex items-start gap-6 hover:bg-white/5 transition duration-500">
-                        <div class="p-4 bg-gold/10 rounded-2xl text-gold"><i data-lucide="anchor"></i></div>
-                        <div>
-                            <h4 class="text-xl font-bold mb-2 tracking-wide">القاعدة (الثبات)</h4>
-                            <p class="text-gray-500 text-sm leading-relaxed">المسك الأبيض الفاخر، العنبر الملكي، ودهن العود السيوفي المعتق.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="collection" class="py-32 bg-[#050505] border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <h2 class="font-serif text-gold tracking-[0.4em] text-sm mb-4 uppercase">Exclusive Selection</h2>
+                <h2 class="font-serif text-gold text-xl mb-2 italic">Luxury Choice</h2>
                 <h3 class="text-4xl md:text-6xl font-bold">المجموعة المختارة</h3>
             </div>
+            <p class="text-gray-500 max-w-xs text-sm mt-6 md:mt-0 italic">إصدارات محدودة تم استخلاصها من أندر الزهور والزيوت الشرقية.</p>
+        </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-                <div class="group glass rounded-[3rem] p-8 text-center transition-all duration-700 hover:-translate-y-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="overflow-hidden rounded-[2rem] mb-8">
-                        <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=600" class="w-full h-80 object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition duration-700">
-                    </div>
-                    <h4 class="text-2xl font-bold mb-2">العود الملكي</h4>
-                    <p class="text-gold font-serif italic mb-6">450 ر.س</p>
-                    <button class="w-full py-4 border border-white/10 rounded-2xl hover:bg-gold hover:text-black font-bold transition">أضف للحقيبة</button>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="product-card glass p-8 rounded-[3rem] text-center relative overflow-hidden group" data-aos="fade-up">
+                <div class="mb-8 overflow-hidden rounded-[2rem]">
+                    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800" class="w-full h-80 object-cover opacity-70 group-hover:opacity-100 transition duration-700">
                 </div>
+                <h4 class="text-2xl font-bold mb-2">العود الملكي</h4>
+                <p class="text-gold font-serif text-xl mb-6">450 ر.س</p>
+                <button class="w-full py-4 bg-white text-black font-bold rounded-2xl hover:bg-gold transition">شراء الآن</button>
+            </div>
 
-                <div class="group glass rounded-[3rem] p-8 text-center transition-all duration-700 hover:-translate-y-4 border-gold/30 border" data-aos="fade-up" data-aos-delay="200">
-                    <div class="overflow-hidden rounded-[2rem] mb-8">
-                        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=600" class="w-full h-80 object-cover opacity-80 group-hover:scale-110 transition duration-700">
-                    </div>
-                    <h4 class="text-2xl font-bold mb-2 text-gold">روح العنبر</h4>
-                    <p class="text-white font-serif italic mb-6">510 ر.س</p>
-                    <button class="w-full py-4 bg-gold text-midnight rounded-2xl font-bold shadow-xl shadow-gold/20">شراء الآن</button>
+            <div class="product-card glass p-8 rounded-[3rem] text-center relative overflow-hidden group border-gold/30 border" data-aos="fade-up" data-aos-delay="100">
+                <div class="absolute top-6 right-6 bg-gold text-midnight text-[8px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter animate-pulse">Bestseller</div>
+                <div class="mb-8 overflow-hidden rounded-[2rem]">
+                    <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=800" class="w-full h-80 object-cover opacity-80 group-hover:opacity-100 transition duration-700">
                 </div>
+                <h4 class="text-2xl font-bold mb-2 text-gold">زهرة اللوتس</h4>
+                <p class="text-white font-serif text-xl mb-6">320 ر.س</p>
+                <button class="w-full py-4 bg-gold text-midnight font-bold rounded-2xl shadow-xl shadow-gold/20">شراء الآن</button>
+            </div>
 
-                <div class="group glass rounded-[3rem] p-8 text-center transition-all duration-700 hover:-translate-y-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="overflow-hidden rounded-[2rem] mb-8">
-                        <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=600" class="w-full h-80 object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition duration-700">
-                    </div>
-                    <h4 class="text-2xl font-bold mb-2">نسيم الزهر</h4>
-                    <p class="text-gold font-serif italic mb-6">280 ر.س</p>
-                    <button class="w-full py-4 border border-white/10 rounded-2xl hover:bg-gold hover:text-black font-bold transition">أضف للحقيبة</button>
+            <div class="product-card glass p-8 rounded-[3rem] text-center relative overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+                <div class="mb-8 overflow-hidden rounded-[2rem]">
+                    <img src="https://images.unsplash.com/photo-1583467875263-d50dec37a88c?auto=format&fit=crop&q=80&w=800" class="w-full h-80 object-cover opacity-70 group-hover:opacity-100 transition duration-700">
                 </div>
+                <h4 class="text-2xl font-bold mb-2">نسيم المساء</h4>
+                <p class="text-gold font-serif text-xl mb-6">280 ر.س</p>
+                <button class="w-full py-4 bg-white text-black font-bold rounded-2xl hover:bg-gold transition">شراء الآن</button>
             </div>
         </div>
     </section>
 
-    <section class="py-24 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/10 to-purple-900/10 blur-[100px]"></div>
-        <p class="text-gray-500 mb-6 uppercase tracking-[0.5em] text-[10px]">Innovated by</p>
-        <a href="index.html" class="text-2xl md:text-4xl font-orbitron font-bold text-gradient bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent hover:scale-110 transition duration-500 inline-block">
-            ARISE TECH AGENCY
-        </a>
-        <div class="mt-8">
-            <p class="text-gray-600 text-[10px] tracking-widest italic">© 2026 ARIJ PERFUMES. ALL RIGHTS RESERVED.</p>
+    <section class="py-24 text-center border-t border-white/5 bg-[#010101]">
+        <div class="mb-12" data-aos="fade-up">
+            <p class="text-gray-600 text-[10px] uppercase tracking-[0.5em] mb-4">Crafted with Precision by</p>
+            <a href="index.html" class="text-2xl md:text-4xl font-bold tracking-tighter hover:scale-110 transition inline-block">
+                ARISE <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">TECH</span>
+            </a>
+        </div>
+        <div class="flex justify-center gap-8 text-gray-700 text-xs uppercase tracking-widest">
+            <span>© 2026 ARIJ PERFUMES</span>
+            <span>LEVEL UP YOUR REALITY</span>
         </div>
     </section>
+
+    <a href="https://wa.me/96597805334" target="_blank" class="fixed bottom-10 left-10 z-[100] bg-green-600 p-4 rounded-full shadow-2xl hover:scale-110 transition active:scale-95">
+        <i data-lucide="message-circle" class="w-6 h-6"></i>
+    </a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // AOS Initialize
         AOS.init({ duration: 1200, once: true });
-        
-        // Icons
         lucide.createIcons();
 
         // Preloader Logic
         window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                setTimeout(() => preloader.style.visibility = 'hidden', 1000);
+            const pre = document.getElementById('preloader');
+            setTimeout(() => { 
+                pre.style.opacity = '0';
+                setTimeout(() => pre.style.display = 'none', 1000);
             }, 1500);
         });
+
+        // Quiz Logic
+        function nextStep(choice) {
+            document.getElementById('q1').classList.add('hidden');
+            const result = document.getElementById('quiz-result');
+            const resultName = document.getElementById('result-name');
+            result.classList.remove('hidden');
+            resultName.innerText = choice === 'morning' ? 'زهرة اللوتس النقيّة' : 'العود الملكي الفاخر';
+        }
+
+        function resetQuiz() {
+            document.getElementById('q1').classList.remove('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+        }
 
         // Navbar Scroll
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 100) {
                 nav.classList.add('py-2', 'bg-black/90');
-                nav.classList.remove('py-4', 'bg-transparent');
+                nav.classList.remove('py-4');
             } else {
                 nav.classList.add('py-4');
                 nav.classList.remove('py-2', 'bg-black/90');
