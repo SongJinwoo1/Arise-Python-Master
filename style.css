@@ -24,7 +24,11 @@ body {
 .main-card {
     width: 100%; max-width: 550px; 
     background: var(--surf); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 25px; padding: 40px 30px; backdrop-filter: blur(15px); text-align: center;
+    border-radius: 25px; padding: 40px 30px; 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px); /* لدعم iPad و Safari */
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
 }
 
 .brand h1 { 
@@ -43,6 +47,7 @@ input, select {
     width: 100%; padding: 15px; background: rgba(0,0,0,0.4); 
     border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; 
     color: #fff; font-size: 16px; font-family: inherit; outline: none;
+    -webkit-appearance: none; /* لإزالة التنسيق الافتراضي في iOS */
 }
 
 @media (max-width: 500px) { .input-group { flex-direction: column; } }
@@ -67,10 +72,13 @@ input, select {
     border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
 }
 
-.leader-avatar { width: 45px; height: 45px; border-radius: 50%; margin-left: 12px; object-fit: cover; }
+.leader-avatar { width: 45px; height: 45px; border-radius: 50%; margin-left: 12px; object-fit: cover; border: 2px solid transparent; }
 .leader-info { text-align: right; }
 .leader-name { color: #fff; font-weight: 700; font-size: 0.9rem; display: block; }
 .leader-role { color: #aaa; font-size: 0.75rem; }
 
-.leader-jin { border-left: 3px solid var(--purp); }
-.leader-ayano { border-left: 3px solid #ff9e00; }
+/* تم تعديل الحدود لتكون على اليمين لتناسب اتجاه RTL */
+.leader-jin { border-right: 3px solid var(--purp); }
+.leader-jin img { border-color: var(--purp); }
+.leader-ayano { border-right: 3px solid #ff9e00; }
+.leader-ayano img { border-color: #ff9e00; }
